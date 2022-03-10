@@ -22,8 +22,24 @@ const Chats = () => {
   const [chatMessages, setChatMessages] = useState([
     new ChatMessageDto("John", "Hi"),
   ]);
+
   const [user, setUser] = useState("");
   const [message, setMessage] = useState("");
+
+  const handleUserChange = (e) => {
+    setUser(e.target.value);
+  };
+
+  const handleMessageChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const sendMessage = () => {
+    if (user && message) {
+      console.log("Sent...");
+    }
+  };
+
   const listChatMessages = chatMessages.map((chatMessageDto, index) => (
     <ListItem key={index}>
       <ListItemText
@@ -46,20 +62,30 @@ const Chats = () => {
               </Grid>
               <Grid xs={2} item>
                 <FormControl fullWidth>
-                  <TextField value={user} label="Nickname" variant="outlined" />
-                </FormControl>
-              </Grid>
-              <Grid xs={9} item>
-                <FormControl fullWidth>
                   <TextField
-                    value={message}
+                    onChange={handleUserChange}
+                    value={user}
                     label="Nickname"
                     variant="outlined"
                   />
                 </FormControl>
               </Grid>
+              <Grid xs={9} item>
+                <FormControl fullWidth>
+                  <TextField
+                    onChange={handleMessageChange}
+                    value={message}
+                    label="Type your message..."
+                    variant="outlined"
+                  />
+                </FormControl>
+              </Grid>
               <Grid xs={1} item>
-                <IconButton>
+                <IconButton
+                  onClick={sendMessage}
+                  aria-label="send"
+                  color="primary"
+                >
                   <SendIcon />
                 </IconButton>
               </Grid>
