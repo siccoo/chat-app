@@ -10,16 +10,19 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { ChatMessageDto } from "../../model/ChatMessageDto";
 
 const Chats = () => {
-  const [chatMessages, setChatMessages] = useState([]);
-  const listChatMessages = chatMessages.map((chatMessageDto, index) => {
+  const [chatMessages, setChatMessages] = useState([
+      new ChatMessageDto("John", "Hi")
+  ]);
+  const listChatMessages = chatMessages.map((chatMessageDto, index) => (
     <ListItem key={index}>
       <ListItemText
         primary={`${chatMessageDto.user} : ${chatMessageDto.message}`}
       />
-    </ListItem>;
-  });
+    </ListItem>
+  ));
   return (
     <>
       <Container>
@@ -30,8 +33,10 @@ const Chats = () => {
             </Typography>
             <Divider />
             <Grid container spacing={4} alignItems="center">
-              <Grid item>
-                <List></List>
+              <Grid id="chat__window" item>
+                <List id="chat__window__message">
+                    {listChatMessages}
+                </List>
               </Grid>
               <Grid item></Grid>
               <Grid item></Grid>
